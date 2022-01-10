@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RestfulWebServiceApplication {
 
-
   /**
    * The entry point of application.
    *
@@ -19,5 +18,6 @@ public class RestfulWebServiceApplication {
   public static void main(final String[] args) {
     SpringApplication.run(RestfulWebServiceApplication.class, args);
   }
+
 
 }

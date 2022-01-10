@@ -1,4 +1,4 @@
-package com.example.restfulwebservice;
+package com.example.restfulwebservice.helloworld;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HelloWorldBean {
 
-  /**
-   * The Name.
-   */
-  private String name;
+    /**
+     * The Name.
+     */
+    private String name;
 }

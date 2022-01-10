@@ -1,7 +1,11 @@
-package com.example.restfulwebservice;
+package com.example.restfulwebservice.helloworld;
 
+import java.util.Locale;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -10,6 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloWorldController {
 
+  /**
+   * The Message source.
+   */
+  @Autowired
+  private MessageSource messageSource;
 
   /**
    * Hello world string.
@@ -41,4 +50,18 @@ public class HelloWorldController {
   public HelloWorldBean helloWorldBean(@PathVariable final String name) {
     return new HelloWorldBean(String.format("hello World, %s!", name));
   }
+
+
+  /**
+   * Hello world internationalized hello world bean.
+   *
+   * @param locale the locale
+   * @return the hello world bean
+   */
+  @GetMapping(path = "/hello-world-internationalized")
+  public HelloWorldBean helloWorldInternationalized(
+      @RequestHeader(name = "Accept-Language", required = false) Locale locale) {
+    return new HelloWorldBean(messageSource.getMessage("greeting.message", null, locale));
+  }
+
 }
