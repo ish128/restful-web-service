@@ -4,7 +4,8 @@ import java.net.URI;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
-
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +29,19 @@ public class UserController {
 
 
   @GetMapping("/users/{id}")
-  public User retrieveUser(@PathVariable final Integer id) {
+  public EntityModel<User> retrieveUser(@PathVariable final Integer id) {
     User user = userDaoService.findOne(id);
     if (user == null) {
       throw new NotFoundUserException(String.format("ID[%s] Not Found", id));
     }
-    return user;
+    //HATEOAS
+    EntityModel<User> model = EntityModel.of(user);
+    model.add(
+        WebMvcLinkBuilder.linkTo(
+                WebMvcLinkBuilder.methodOn(this.getClass()).retrieveAllUsers())
+            .withRel("all-users"));
+
+    return model;
   }
 
   @PostMapping("/users")
