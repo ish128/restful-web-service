@@ -31,7 +31,7 @@ public class PersonController {
   }
 
   /**
-   * 2. EntityModel을 이용해서 상속없이, 도메인 엔티티 사용해서 hateoas 적용된 응답 리턴
+   * 2. Item resource representation model
    *
    * @return the entity model
    */
@@ -44,7 +44,7 @@ public class PersonController {
   }
 
   /**
-   * 3. (목록응답인 경우) CollectionModel를 이용해서 상속없이, 도메인 엔티티에 hateoas 적용하여 리턴
+   * 3. Collection resource representation model
    *
    * @return the collection model
    */
