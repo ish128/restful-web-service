@@ -6,17 +6,23 @@ server:
     path: '/error'            # 서버 에러 페이지
     whitelabel.enabled: true  # 서버 오류 발생시 브라우저에 보여줄 기본 페이지 생성 여부
 
+# 로킹 설정
 logging:
   level:
     org.springframework: DEBUG
     com.example.restfulwebservice: DEBUG
 
 spring:
+  # 스프링 시큐리티 auto config 사용 시, 계정정보 변경 (보통 시큐리티는 auto config 설정 사용안한다.)
+  #  security:
+  #    user:
+  #      name: user
+  #      password: 1234
   messages:
     basename: messages,errors
     encoding: UTF-8
 
-
+# actuator 설정
 management:
   endpoints:
     web:
