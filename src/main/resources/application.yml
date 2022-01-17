@@ -1,5 +1,5 @@
 server:
-  port: 8088
+  port: 8080
   error:
     include-exception: false
     include-stacktrace: never # 오류 응답에 stacktrace 내용을 포함할 지 여부
@@ -13,6 +13,21 @@ logging:
     com.example.restfulwebservice: DEBUG
 
 spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+  # jpa 사용 시, 생성되는 sql 표출되도록 설정
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    # hibernate가 entity -> table 로 생성한 뒤에...
+    defer-datasource-initialization: true
+
+  # 내장 h2 db로 접속할수 있는 콘솔 사용하도록 설정 (/h2-console)
+  h2:
+    console:
+      enabled: true
+
   # 스프링 시큐리티 auto config 사용 시, 계정정보 변경 (보통 시큐리티는 auto config 설정 사용안한다.)
   #  security:
   #    user:
@@ -22,9 +37,13 @@ spring:
     basename: messages,errors
     encoding: UTF-8
 
+
+
 # actuator 설정
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+
+
